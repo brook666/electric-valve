@@ -23,8 +23,11 @@
 #include "stm8l15x_it.h"
 #include "timer.h"
 #include "dma.h"
+#include "uart1.h"
+#define DEBUG    
 extern uint8_t uart1_dma_flag;
 extern DMA_RecvData_t usart1_recv_data;
+static uint8_t i=0;
 /** @addtogroup STM8L15x_StdPeriph_Examples
   * @{
   */
@@ -294,17 +297,34 @@ INTERRUPT_HANDLER(TIM2_UPD_OVF_TRG_BRK_USART2_TX_IRQHandler, 19)
   */
   if(TIM2_GetITStatus(TIM2_IT_Update)!=RESET)
   {
-   TIM2_ClearITPendingBit(TIM2_IT_Update); 
-   TIM2_Cmd(DISABLE);  
-   if(uart1_dma_flag)
-   {
-   uart1_dma_flag=0;
-   usart1_recv_data.recvFlag = 1;
-   usart1_recv_data.recvfrmcnt++;
+    #ifdef DEBUG
+    printf("update interrupt happened\n");
+    #endif
+    TIM2_ClearITPendingBit(TIM2_IT_Update); 
+    if(i>2)
+    {
+      i=0;
+      #ifdef DEBUG
+       printf("close timer\n");
+      #endif
+      Timer2_Init(DISABLE);
+      if(uart1_dma_flag)
+      {
+         uart1_dma_flag=0;
+         usart1_recv_data.recvFlag = 1;
+         usart1_recv_data.recvfrmcnt++;
+      }
+       //USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启接收中断 
+      // USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);//关闭空闲中断
+      Uart1_Init();
    }
-   USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-   USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//关闭接收中断
-  }
+   else
+   {
+     i++;
+   }
+   
+ }
+
   
   
 }
@@ -319,10 +339,17 @@ INTERRUPT_HANDLER(TIM2_CC_USART2_RX_IRQHandler, 20)
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
+  
    if(TIM2_GetITStatus(TIM2_IT_CC1)!=RESET)
   {
-    TIM2_SetCounter(0);
+    i=0;
+    #ifdef DEBUG
+    printf("capture interrupt happened\n");
+    #endif
+    TIM2_ClearITPendingBit(TIM2_IT_CC1);  
+    Timer2_Init(ENABLE);
   }
+  
 }
 
 
@@ -421,11 +448,26 @@ INTERRUPT_HANDLER(USART1_RX_TIM5_CC_IRQHandler, 28)
 	//u8 Res;
 	//Res = USART_ReceiveData8(USART1);
 	//USART_SendData8(USART1, Res);
-  if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET)
+//  if(USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET)
+//  {  
+//    uart1_dma_flag=1;
+//    printf("usart receive data\n");
+//    USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+//    USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);//关闭接收中断
+//    Timer2_Init(ENABLE);
+//  }
+  
+  
+  if(USART_GetITStatus(USART1,USART_IT_IDLE)!=RESET)//空闲中断
   {
+    USART_ClearITPendingBit(USART1, USART_IT_IDLE);
     uart1_dma_flag=1;
-    USART_ITConfig(USART1, USART_IT_RXNE, DISABLE);//关闭接收中断
-    Timer2_Init();
+    #ifdef DEBUG
+    printf("usart receive data\n");
+    #endif
+    USART_ClearITPendingBit(USART1, USART_IT_IDLE);
+    USART_ITConfig(USART1, USART_IT_IDLE, DISABLE);//关闭空闲中断
+    Timer2_Init(ENABLE);
   }
 }
 

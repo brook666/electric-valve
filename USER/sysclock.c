@@ -23,7 +23,7 @@ void SystemClock_Init(void)
 		CLK_HSICmd(ENABLE);
 		CLK_SYSCLKSourceConfig(CLK_SYSCLKSource_HSI);
 	  	CLK_SYSCLKDivConfig(CLK_SYSCLKDiv_1); 
-	
+	        //CLK_SYSCLKDivConfig(CLK_SYSCLKDiv_16); 
 #endif   
 
 }

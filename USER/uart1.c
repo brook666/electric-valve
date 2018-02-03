@@ -22,8 +22,10 @@ void Uart1_Init(void)
 				USART_Parity_No, USART_Mode_Tx|USART_Mode_Rx);
 	USART_ClearITPendingBit(USART1, USART_IT_RXNE);
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启接收中断
+        
 	//USART_ITConfig(USART1, USART_IT_TC, ENABLE);//开启接收中断
-	USART_Cmd(USART1, ENABLE);	//使能UART2
+        USART_ITConfig(USART1,USART_IT_IDLE, ENABLE);//开启空闲中断
+	USART_Cmd(USART1, ENABLE);	//使能UART1
 }
 
 /*******************************************************************************

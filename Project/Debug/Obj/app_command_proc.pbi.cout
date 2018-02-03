@@ -1,4 +1,4 @@
-"C:\Users\Administrator\Desktop\电动阀\electric valve\USER\uart1.c"
+"C:\Users\Administrator\Desktop\电动阀\electric valve\USER\app_command_proc.c"
 -std=c99
 -ferror-limit=100
 -I
@@ -228,7 +228,7 @@ C:\Users\Administrator\Desktop\电动阀\electric valve\USER
 -D__IAR_COMPILERBASE__=594189
 -D_GOANNA=1
 -D__DATE__="Feb  3 2018"
--D__TIME__="14:45:34"
+-D__TIME__="17:41:38"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

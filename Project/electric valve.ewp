@@ -1688,6 +1688,9 @@
   <group>
     <name>user</name>
     <file>
+      <name>$PROJ_DIR$\..\USER\app_command_proc.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\USER\dma.c</name>
     </file>
     <file>

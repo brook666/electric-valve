@@ -1,22 +1,22 @@
-"D:\project\electric valve\USER\sysclock.c"
+"C:\Users\Administrator\Desktop\电动阀\electric valve\USER\sysclock.c"
 -std=c99
 -ferror-limit=100
 -I
-D:\project\electric valve\Project\..\FWlib\inc
+C:\Users\Administrator\Desktop\电动阀\electric valve\Project\..\FWlib\inc
 -I
-D:\project\electric valve\Project\..\FWlib\src
+C:\Users\Administrator\Desktop\电动阀\electric valve\Project\..\FWlib\src
 -I
-D:\project\electric valve\Project\..\USER
+C:\Users\Administrator\Desktop\电动阀\electric valve\Project\..\USER
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\stm8\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.0\stm8\inc\c
 -I
-D:\project\electric valve\FWlib\inc
+C:\Users\Administrator\Desktop\电动阀\electric valve\FWlib\inc
 -I
-D:\project\electric valve\FWlib\src
+C:\Users\Administrator\Desktop\电动阀\electric valve\FWlib\src
 -I
-D:\project\electric valve\USER
+C:\Users\Administrator\Desktop\电动阀\electric valve\USER
 -DUSE_STDPERIPH_DRIVER=1
 -DSTM8L15X_MD=1
 -D__CHAR_BITS__=8
@@ -227,8 +227,8 @@ D:\project\electric valve\USER
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=594189
 -D_GOANNA=1
--D__DATE__="Feb  2 2018"
--D__TIME__="20:16:09"
+-D__DATE__="Feb  3 2018"
+-D__TIME__="13:59:06"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

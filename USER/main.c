@@ -2,6 +2,7 @@
 #include "sysclock.h"
 #include "uart1.h"
 #include "dma.h"
+#include "timer.h"
  uint8_t uart1_dma_flag;
 void LED_Init(void)
 {
@@ -22,15 +23,16 @@ void main(void)
 {	
   	enableInterrupts();
   	SystemClock_Init();
-        LED_Init();
+       // LED_Init();
 	Uart1_Init();
         usart_dma_init() ;
-	
+	//Timer2_Init(ENABLE);
 	while(1)
 	{
-	 GPIO_ToggleBits(GPIOD, GPIO_Pin_4);
-         //UART1_SendStr("UART1 REMAP TEST");	 
-	 delay_ms(1000);                  
+	 //GPIO_ToggleBits(GPIOD, GPIO_Pin_4);
+         //UART1_SendStr("UART1 REMAP TEST");
+         Iterates_usart1_buffer();
+	 //delay_ms(1000);                  
 	}
 }
 
